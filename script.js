@@ -1,3 +1,5 @@
+const rng = new Math.seedrandom(new URLSearchParams(window.location.search).get("board"));
+
 let board = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -42,10 +44,10 @@ let numfound = 0;
 function placeship(len) {
     let found = false;
     while (!found) {
-        let x = Math.floor(Math.random() * 10);
-        let y = Math.floor(Math.random() * 10);
+        let x = Math.floor(rng() * 10);
+        let y = Math.floor(rng() * 10);
 
-        let dir = [[0, 1], [0, -1], [-1, 0], [1, 0]][Math.floor(Math.random() * 4)];
+        let dir = [[0, 1], [0, -1], [-1, 0], [1, 0]][Math.floor(rng() * 4)];
 
         let ok = true;
 
