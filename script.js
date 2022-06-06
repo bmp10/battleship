@@ -1,33 +1,7 @@
 const rng = new Math.seedrandom(new URLSearchParams(window.location.search).get("board"));
 
-let board = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
-
 let ships = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 1, 1, 1, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 1, 0, 1, 1, 1, 1, 1, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 1, 1, 1, 1, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
-
-ships = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -39,6 +13,8 @@ ships = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
+let whites = 0;
+let reds = 0;
 let numfound = 0;
 
 function placeship(len) {
@@ -81,7 +57,6 @@ placeship(2);
 let count = 0;
 
 function clicked(btn, x, y) {
-    board[y][x] = 1;
     if (btn.style.backgroundColor != "gray" || numfound == 17) {
         return
     }
@@ -94,11 +69,15 @@ function clicked(btn, x, y) {
         numfound += 1;
 
         if (numfound == 17) {
-            score.innerHTML = "WIN!\nScore: " + count.toString()
+            score.innerHTML = "WIN!  Score: " + count.toString()
         }
+        reds += 1;
     } else {
         btn.style.backgroundColor = "white";
+        whites += 1;
     }
+    score.innerHTML += " Reds: " + reds.toString()
+    score.innerHTML += " Whites: " + whites.toString()
 }
 
 for (let i = 0; i < 10; i ++) {
@@ -122,7 +101,7 @@ for (let i = 0; i < 10; i ++) {
 }
 
 let score = document.createElement("p")
-score.innerHTML = "Score: 0"
+score.innerHTML = "Score: 0 Reds: 0 Whites: 0"
 score.style.top = "1000px"
 score.style.position = "absolute"
 score.style.fontSize = "100px"
