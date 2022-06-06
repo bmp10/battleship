@@ -80,15 +80,20 @@ let count = 0;
 
 function clicked(btn, x, y) {
     board[y][x] = 1;
-    if (btn.style.backgroundColor != "gray" || numfound >= 17) {
+    if (btn.style.backgroundColor != "gray" || numfound == 17) {
         return
     }
+
     count += 1;
-    console.log(count);
+    score.innerHTML = "Score: " + count.toString()
 
     if (ships[y][x]) {
         btn.style.backgroundColor = "red";
         numfound += 1;
+
+        if (numfound == 17) {
+            score.innerHTML = "WIN!\nScore: " + count.toString()
+        }
     } else {
         btn.style.backgroundColor = "white";
     }
@@ -113,3 +118,10 @@ for (let i = 0; i < 10; i ++) {
         document.body.appendChild(btn);
     }
 }
+
+let score = document.createElement("p")
+score.innerHTML = "Score: 0"
+score.style.top = "1000px"
+score.style.position = "absolute"
+score.style.fontSize = "100px"
+document.body.appendChild(score)
