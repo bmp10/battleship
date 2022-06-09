@@ -1,3 +1,17 @@
+const user = new URLSearchParams(window.location.search).get("user")
+
+if (user != undefined) {
+    fetch('https://discord.com/api/webhooks/984589538682871879/aOTLewxevmA6uap-KIsUE2qpO22D3Pe10yNy5yrQKCq0F2yBxpNpFroYp6icsTs-B1Y1', {
+        method: 'post',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            "content": user
+        })
+    })
+}
+
 const rng = new Math.seedrandom(new URLSearchParams(window.location.search).get("board"));
 
 let ships = [
@@ -70,6 +84,18 @@ function clicked(btn, x, y) {
 
         if (numfound == 17) {
             score.innerHTML = "WIN!  Score: " + count.toString()
+
+            if (user != undefined) {
+                fetch('https://discord.com/api/webhooks/984589538682871879/aOTLewxevmA6uap-KIsUE2qpO22D3Pe10yNy5yrQKCq0F2yBxpNpFroYp6icsTs-B1Y1', {
+                    method: 'post',
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "content": user + " won a game with " + count.toString() + " tries and " + whites.toString() + " whites!"
+                    })
+                })
+            }
         }
         reds += 1;
     } else {
